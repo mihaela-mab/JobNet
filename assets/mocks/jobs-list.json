@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "title": "Software Engineer",
+        "experienceRequired": true,
+        "companyName": "Company Software Consulting SRL",
+        "minimumExperience": 4,
+        "domain": "IT"
+    },
+    {
+        "id": 2,
+        "title": "JavaScript Developer Intern",
+        "experienceRequired": false,
+        "companyName": "OtherCompany Software Consulting SRL",
+        "minimumExperience": 0,
+        "domain": "IT"
+    }
+]

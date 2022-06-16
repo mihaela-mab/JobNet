@@ -1,0 +1,12 @@
+{
+    "id": 1,
+    "title": "Software Engineer",
+    "experienceRequired": true,
+    "companyName": "Company Software Consulting SRL",
+    "minimumExperience": 4,
+    "domain": "IT",
+    "description": "Lorem ipsum...",
+    "techonologies": ["Java", "Spring", "Springboot", "REST API's", "My SQL", "Jenkins", "Git"],
+    "benefits": ["21 paid vacation days", "Paid courses and certifications", "Mentorship & coaching program"],
+    "role": ["Develop web applications using REST API's"]
+}

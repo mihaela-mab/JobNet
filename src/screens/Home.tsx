@@ -1,36 +1,51 @@
-import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
-import Carousel from 'react-native-snap-carousel';
-
-const _renderItem = ({item, index}) => {
-    return (
-        <View >
-            <Text >{ item.title }</Text>
-        </View>
-    );
-}
+import React, { useEffect, useRef } from "react";
+import { View, Text, Image, StyleSheet, Animated, Easing } from "react-native";
+import { JobSlider } from "../components/JobsSlider";
+import { sharedStyles } from "../shared/styles/styles";
+import { themeVariables } from "../shared/styles/themeVariables";
 
 export const HomeScreen = () => {
+    const spinValue = new Animated.Value(0);
+    const spin = spinValue.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '360deg'],
+    });
+
+    const opacityValue = useRef(new Animated.Value(0)).current;
+
+    useEffect(() => {
+        Animated.timing(spinValue, {
+            toValue: 1,
+            duration: 2000,
+            easing: Easing.linear,
+            useNativeDriver: false,
+        }).start();
+
+        Animated.timing(opacityValue, {
+            toValue: 1,
+            duration: 3000,
+            useNativeDriver: true
+        }).start();
+    }, []);
+
     return (
         <View style={styles.container}>
-            <View>
-                <Image source={require('../../assets/logo.png')} style={styles.imageContainer}/>
-                <Text>JobNet</Text>
-            </View>
-            <View>
-                <Text>Newly added</Text>
-                <Carousel
-                    data={[{id: 1, title: 'Some random title'}, {id: 2, title: 'Some random title 2'}]}
-                    renderItem={_renderItem}
-                    sliderWidth={100}
-                    itemWidth={50}
+            <View style={{flexDirection: 'row'}}>
+                <Animated.Image
+                    source={require('../../assets/logo-simple.png')}
+                    style={[styles.imageContainer, {transform: [{rotate: spin}]}]}
                 />
+                <Animated.Text
+                    style={[styles.appTitle, {opacity: opacityValue}]}
+                >
+                    JobNet
+                </Animated.Text>
             </View>
+            <Text style={sharedStyles.sectionTitle}>Newly added</Text>
+            <JobSlider />
         </View>
     )
 }
-
-
 
 const styles = StyleSheet.create({
     container: {
@@ -38,7 +53,15 @@ const styles = StyleSheet.create({
         flex: 1
     },
     imageContainer: {
-        width: 150,
-        height: 80
+        width: 80,
+        height: 80,
+        marginBottom: 20
+    },
+    appTitle: {
+        alignSelf: "center",
+        fontSize: 20,
+        fontWeight: '700',
+        color: themeVariables.primaryDark,
+        paddingBottom: 20
     }
 });

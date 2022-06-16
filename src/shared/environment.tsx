@@ -1,3 +1,3 @@
 export const Environment = {
-    baseUrl: 'https://fbfb-84-232-165-107.eu.ngrok.io/',
+    baseUrl: 'https://c8c8-84-232-165-107.eu.ngrok.io',
 }

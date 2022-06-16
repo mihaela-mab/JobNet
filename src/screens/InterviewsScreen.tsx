@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text } from "react-native";
 
-
-export const Interviews = () => {
+export const InterviewsScreen = () => {
     return (
         <View>
             <Text>Interviews</Text>

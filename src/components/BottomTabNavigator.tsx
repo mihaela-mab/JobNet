@@ -3,9 +3,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from "@react-navigation/stack";
 import { HomeScreen } from '../screens/Home';
 import { JobsListingScreen } from "../screens/JobsListing";
+import { JobScreen } from "../screens/Job";
+import { InterviewsScreen } from "../screens/InterviewsScreen";
 import { ProfileScreen } from "../screens/Profile";
 import { Image } from "react-native";
-import { JobScreen } from "../screens/Job";
+import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
+import IonIcon from "react-native-vector-icons/Ionicons";
+
 
 const BottomTabs = createBottomTabNavigator();
 const JobsStack = createStackNavigator();
@@ -31,15 +36,22 @@ export const BottomTabNavigator = () => {
                 name="Jobs"
                 component={JobsStackScreen}
                 options={{
-                    tabBarIcon: () => (<Image source={require('../../assets/loupe.png')} style={{width: 30, height: 30}}/>),
+                    tabBarIcon: () => (<IonIcon name={'search'} size={30} />),
                     headerShown: false
+                }}
+            />
+            <BottomTabs.Screen
+                name="Interviews"
+                component={InterviewsScreen}
+                options={{
+                    tabBarIcon: () => (<MaterialIcon name={'desktop-mac'} size={30}/>)
                 }}
             />
             <BottomTabs.Screen
                 name="Profile"
                 component={ProfileScreen} 
                 options={{
-                    tabBarIcon: () => (<Image source={require('../../assets/user.png')} style={{width: 30, height: 30}}/>)
+                    tabBarIcon: () => (<FontAwesomeIcon name={'user-circle-o'} size={30}/>)
                 }}
             />
         </BottomTabs.Navigator>

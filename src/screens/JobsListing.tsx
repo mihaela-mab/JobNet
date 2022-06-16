@@ -1,26 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { View, Text, ScrollView, StyleSheet } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import React from "react";
+import { View, StyleSheet, FlatList } from "react-native";
 import { JobCard } from "../components/JobCard";
-import { Job } from "../models/Job";
-import { Environment } from "../shared/environment";
+import { FadeInAnimation } from "../components/animations/FadeIn";
+import { useSelector } from "react-redux";
 
 export const JobsListingScreen = ({ navigation }: { navigation: any}) => {
-    const [jobs, setJobs] = useState<Array<Job>>([]);
-
-    const getJobs = useCallback(async () => {
-        const response = await fetch(`${Environment.baseUrl}/jobs`);
-
-        if (response.ok) {
-            const jobsList = await response.json();
-            console.log(jobsList);
-            setJobs(jobsList);
-        }
-    }, []);
-
-    useEffect(() => {
-        getJobs();
-    }, []);
+    const { isGetJobsRequestReady, jobs } = useSelector(state => state.jobsReducer);
 
     return (
         <View style={styles.container}>
@@ -28,10 +13,12 @@ export const JobsListingScreen = ({ navigation }: { navigation: any}) => {
                 data={jobs}
                 keyExtractor={job => job.id.toString()}
                 renderItem={({ item }) => (
-                    <JobCard
-                      job={item}
-                      navigation={navigation}
-                    />
+                    <FadeInAnimation>
+                        <JobCard
+                            job={item}
+                            navigation={navigation}
+                        />
+                    </FadeInAnimation>
                   )}
             />
         </View>
